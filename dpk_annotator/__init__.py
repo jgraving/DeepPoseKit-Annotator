@@ -5,7 +5,7 @@ from .io import VideoReader, VideoWriter
 
 from . import utils
 
-from .gui import Annotator, Skeleton
+from .gui import Annotator
 from .KMeansSampler import KMeansSampler
 
 __version__ = '0.1.dev'
