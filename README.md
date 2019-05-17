@@ -17,7 +17,7 @@ Annotation Hotkeys
 
 License
 ------------
-Released under a Apache 2.0 License. See [LICENSE](https://github.com/jgraving/deepposekit-annotator/blob/master/LICENSE) for details.
+Released under a Apache 2.0 License. See [LICENSE](https://github.com/jgraving/deepposekit-annotator/blob/master/LICENSE.md) for details.
 
 Installation
 ------------
