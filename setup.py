@@ -33,9 +33,9 @@ if major >= 3 and minor >= 6:
 # certain easy_install versions
 os.environ["MPLCONFIGDIR"] = "."
 
-DESCRIPTION = "a GUI for annotating images with user-defined keypoints"
+DESCRIPTION = "a toolkit for annotating images with user-defined keypoints"
 LONG_DESCRIPTION = """\
-a GUI for annotating images with user-defined keypoints
+a toolkit for annotating images with user-defined keypoints
 """
 
 DISTNAME = 'dpk_annotator'

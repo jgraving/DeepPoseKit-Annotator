@@ -1,6 +1,5 @@
-DeepPoseKit Annotator: a GUI for annotating images with user-defined keypoints
+DeepPoseKit Annotator: a toolkit for annotating images with user-defined keypoints
 ============
-
 This software is still in early-release development. Expect some adventures.
 
 Annotation Hotkeys
