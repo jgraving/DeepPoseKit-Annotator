@@ -56,3 +56,13 @@ docs/_build/
 
 # PyBuilder
 target/
+
+
+\.DS_Store
+
+examples/\.ipynb_checkpoints/
+
+examples/hummingbirds/\.ipynb_checkpoints/
+
+examples/insects/
+
