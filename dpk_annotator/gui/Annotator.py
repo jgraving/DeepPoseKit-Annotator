@@ -27,90 +27,88 @@ __all__ = ['Annotator']
 
 class Annotator(GUI):
 
+    '''
+    A GUI for annotating images.
+
+    ------------------------------------------------------------
+         Keys             |   Action
+    ------------------------------------------------------------
+    >    +,-              |   Rescale the image
+    >    Left mouse       |   Move active keypoint
+    >    W, A, S, D       |   Move active keypoint
+    >    space            |   Changes W,A,S,D mode (swaps between 1px or 10px)
+    >    J, L             |   Load previous or next image
+    >    <, >             |   Jump 10 images backward or forward
+    >    I, K or          |
+         tab, shift+tab   |   Switch active keypoint
+    >    R                |   Mark frame as unannotated, or "reset"
+    >    F                |   Mark frame as annotated or "finished"
+    >    Esc, Q           |   Quit the Annotator GUI
+    ------------------------------------------------------------
+
+    Note: Data is automatically saved when moving between frames.
+
+    Parameters
+    ----------
+    datapath: str
+        Filepath of the HDF5 (.h5) file that contains the images to
+        be annotated.
+
+    dataset: str
+        Key name to access the images in the .h5 file.
+
+    skeleton: str
+        Filepath of the .csv or .xlsx file that has indexed information
+        on name of the keypoint (part, e.g. head), parent (the direct
+        connecting part, e.g. neck connects to head, parent is head),
+        and swap (swapping positions with a part when reflected).
+
+        See example file for more information.
+
+    scale: int/float, default 1
+        Scaling factor for the GUI (e.g. used in zooming).
+
+    text_scale: float
+        Scaling factor for the GUI font.
+        A text_scale of 1 works well for 1920x1080 (1080p) images
+    
+    shuffle_colors: bool, default = True
+        Whether to shuffle the color order for drawing keypoints
+
+    refresh: int, default 100
+        Delay on receiving next keyboard input in milliseconds.
+
+    Attributes
+    ----------
+    window_name: str
+        Name of the Annotation window when running program.
+        Set to be 'Annotation' unless otherwise changed.
+
+    n_images: int
+        Number of images in the .h5 file.
+
+    n_keypoints: int
+        Number of keypoints in the skeleton.
+
+    key: int
+        The key that is pressed on the keyboard.
+
+    image_idx: int
+        Index of a specific image in the .h5 file.
+
+    image: numpy.ndarray
+        One image accessed using image_idx.
+
+    Example
+    -------
+    >>> from deepposekit import Annotator
+    >>> app = Annotator('annotation.h5', 'images', 'skeleton.csv')
+    >>> app.run()
+
+    '''
+
+
     def __init__(self, datapath, dataset, skeleton, scale=1, text_scale=0.15, shuffle_colors=True, refresh=100):
-        ''' A GUI for annotating images.
-
-        Annotator inherits from the GUI class and runs to annotate
-        new data. Any corrections can be made on the Annotator.
-
-        Hotkeys are bound for convenience in the following manner:
-        ------------------------------------------------------------
-             Keys             |   Action
-        ------------------------------------------------------------
-        >    +,-              |   Rescale the image
-        >    Left mouse       |   Move active keypoint
-        >    W, A, S, D       |   Move active keypoint
-        >    space            |   Changes W,A,S,D mode (swaps between 1px or 10px)
-        >    J, L             |   Load previous or next image
-        >    <, >             |   Jump 10 images backward or forward
-        >    I, K or          |
-             tab, shift+tab   |   Switch active keypoint
-        >    R                |   Mark frame as unannotated, or "reset"
-        >    F                |   Mark frame as annotated or "finished"
-        >    Esc, Q           |   Quit the Annotator GUI
-        ------------------------------------------------------------
-
-        Note: Data is automatically saved when moving between frames.
-
-        Parameters
-        ----------
-        datapath: str
-            Filepath of the HDF5 (.h5) file that contains the images to
-            be annotated.
-
-        dataset: str
-            Key name to access the images in the .h5 file.
-
-        skeleton: str
-            Filepath of the .csv or .xlsx file that has indexed information
-            on name of the keypoint (part, e.g. head), parent (the direct
-            connecting part, e.g. neck connects to head, parent is head),
-            and swap (swapping positions with a part when reflected).
-
-            See example file for more information.
-
-        scale: int/float, default 1
-            Scaling factor for the GUI (e.g. used in zooming).
-
-        text_scale: float
-            Scaling factor for the GUI font.
-            A text_scale of 1 works well for 1920x1080 (1080p) images
-        
-        shuffle_colors: bool, default = True
-            Whether to shuffle the color order for drawing keypoints
-
-        refresh: int, default 100
-            Delay on receiving next keyboard input in milliseconds.
-
-        Attributes
-        ----------
-        window_name: str
-            Name of the Annotation window when running program.
-            Set to be 'Annotation' unless otherwise changed.
-
-        n_images: int
-            Number of images in the .h5 file.
-
-        n_keypoints: int
-            Number of keypoints in the skeleton.
-
-        key: int
-            The key that is pressed on the keyboard.
-
-        image_idx: int
-            Index of a specific image in the .h5 file.
-
-        image: numpy.ndarray
-            One image accessed using image_idx.
-
-        Example
-        -------
-        >>> from deepposekit import Annotator
-        >>> app = Annotator('annotation.h5', 'images', 'skeleton.csv')
-        >>> app.run()
-
-        '''
-
         super(GUI, self).__init__()
 
         self.window_name = 'Annotation'
