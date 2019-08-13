@@ -20,18 +20,9 @@ limitations under the License.
 
 import os
 import sys
+import warnings
+from setuptools import setup, find_packages
 
-major = sys.version_info.major
-minor = sys.version_info.minor
-
-if major >= 3 and minor >= 6:
-  ImportError = ModuleNotFoundError
-
-
-# temporarily redirect config directory to prevent matplotlib importing
-# testing that for writeable directory which results in sandbox error in
-# certain easy_install versions
-os.environ["MPLCONFIGDIR"] = "."
 
 DESCRIPTION = "a toolkit for annotating images with user-defined keypoints"
 LONG_DESCRIPTION = """\
@@ -46,44 +37,7 @@ LICENSE = 'Apache 2.0'
 DOWNLOAD_URL = 'https://github.com/jgraving/deepposekit-annotator.git'
 VERSION = '0.1.dev'
 
-from setuptools import setup, find_packages
-
-def check_dependencies():
-    install_requires = []
-    try:
-        import numpy
-    except ImportError:
-        install_requires.append('numpy')
-    try:
-        import matplotlib
-    except ImportError:
-        install_requires.append('matplotlib')
-    try:
-        import pandas
-    except ImportError:
-        install_requires.append('pandas')
-    try:
-        import xlrd
-    except:
-        install_requires.append('xlrd')
-    try:
-        import h5py
-    except ImportError:
-        install_requires.append('h5py')
-    try:
-        import cv2
-    except ImportError:
-        install_requires.append('opencv-python')
-    try:
-        import sklearn
-    except ImportError:
-        install_requires.append('scikit-learn')
-
-    return install_requires
-
 if __name__ == "__main__":
-
-    install_requires = check_dependencies()
 
     setup(name=DISTNAME,
           author=MAINTAINER,
@@ -96,11 +50,16 @@ if __name__ == "__main__":
           url=URL,
           version=VERSION,
           download_url=DOWNLOAD_URL,
-          install_requires=install_requires,
+          install_requires=['numpy',
+                            'matplotlib',
+                            'pandas',
+                            'xlrd',
+                            'h5py',
+                            'opencv-python',
+                            'scikit-learn'],
           packages=find_packages(),
           zip_safe=False,
           classifiers=['Intended Audience :: Science/Research',
-                       'Programming Language :: Python :: 2.7',
                        'Programming Language :: Python :: 3',
                        'Topic :: Scientific/Engineering :: Visualization',
                        'Topic :: Scientific/Engineering :: Image Recognition',
@@ -109,3 +68,4 @@ if __name__ == "__main__":
                        'Operating System :: POSIX',
                        'Operating System :: Unix',
                        'Operating System :: MacOS'])
+    
