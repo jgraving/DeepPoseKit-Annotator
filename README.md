@@ -1,8 +1,8 @@
-DeepPoseKit Annotator: a toolkit for annotating images with user-defined keypoints
+(DEPRECATED) DeepPoseKit Annotator: a toolkit for annotating images with user-defined keypoints
 ============
-This package is part of [DeepPoseKit](https://github.com/jgraving/deepposekit)
+This package is now deprecated and is moved to the main [DeepPoseKit](https://github.com/jgraving/deepposekit) repository.
 
-Note: This software is still in early-release development. Expect some adventures.
+This repository exists only for archival purposes.
 
 Annotation Hotkeys
 ------------
